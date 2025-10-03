@@ -1,0 +1,578 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+body {
+font-family: "archivo-narrow-variable", sans-serif;
+font-variation-settings: "wght" 400;
+  background: #fff;
+  color: #111;
+}
+
+/* Header */
+header {
+  display: flex;
+  flex-direction: column; /* stack logo and nav vertically */
+  align-items: flex-start; /* keep logo top-left */
+  padding: 15px 30px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.no-style-link {
+  color: inherit;           /* inherit text color from parent */
+  text-decoration: none;    /* remove underline */
+}
+
+.no-style-link:hover {
+  text-decoration: none;    /* prevent underline on hover */
+  color: inherit;           /* no color change on hover */
+}
+
+
+/* Center nav below logo */
+header nav.center-nav {
+  width: 100%;
+  margin-top: 0px;
+}
+
+header nav.center-nav ul {
+  display: flex;
+  justify-content: center; /* center the nav items horizontally */
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+header nav.center-nav ul li a {
+  color: #111;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+header nav.center-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Grid Layout */
+.container {
+  max-width: 1600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+/* Uniform Preview Sizes */
+.item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4; /* all previews same proportion */
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crop images neatly */
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.item img:hover {
+  opacity: 0.85;
+}
+
+/* Lightbox Popup */
+.lightbox {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 107px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.9);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 70vh;
+  margin: auto;
+  display: block;
+}
+
+.lightbox-caption {
+  margin-top: 20px;
+  color: #fff;
+}
+
+.lightbox-caption h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.lightbox-caption p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+body {
+  transition: background 0.3s ease;
+}
+
+header {
+  transition: background 0.3s ease;
+}
+
+header .logo,
+header nav ul li a {
+  transition: color 0.3s ease;
+}
+
+.grid .item img {
+  transition: opacity 0.3s ease;
+}
+
+
+
+body.dark-mode {
+  background: #000;
+}
+
+body.dark-mode header {
+  background: #000;
+}
+
+body.dark-mode .logo,
+body.dark-mode .center-nav ul li a {
+  color: #fff;
+}
+
+
+body.dark-mode .grid .item img:not(.active-category) {
+  opacity: 0;
+}
+
+
+footer {
+  padding: 15px 15px;
+    position: sticky;
+
+
+}
+
+
+.grid .item img.disabled {
+  pointer-events: none; /* prevents clicking */
+  cursor: default;      /* shows normal cursor */
+}
+
+
+/* Lightbox Arrows - H&M Style */
+.lightbox .prev,
+.lightbox .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  background: none; /* no circle */
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  z-index: 3000; /* make sure it’s above the image */
+}
+
+/* Position left and right */
+.lightbox .prev {
+  left: 10px;
+}
+
+.lightbox .next {
+  right: 10px;
+}
+
+/* Thin white arrows using pseudo-elements */
+.lightbox .prev::before,
+.lightbox .next::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.lightbox .prev::before {
+  transform: rotate(-135deg); /* points left */
+}
+
+.lightbox .next::before {
+  transform: rotate(45deg); /* points right */
+}
+
+
+.center-nav a {
+  color: black; /* default color */
+  text-decoration: none;
+  transition: color 0.3s ease; /* smooth fade */
+}
+
+.center-nav a.active-tab {
+  /*text-decoration: underline;*/
+  font-weight: bold;
+  color: black; /* make sure active stays black */
+}
+
+.center-nav a:not(.active-tab) {
+  opacity: 0.3; /* faded color for unselected */
+}
+
+.text-item {
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.text-item:hover {
+  background: #e0e0e0;
+}
+
+.item {
+  position: relative; /* container for floating button */
+  display: inline-block; /* keeps image box size fixed */
+  width: 200px; /* same as image width */
+}
+
+
+
+
+.add-btn {
+  position: absolute;
+  bottom: 5px;      /* distance from top of image */
+  right: 5px;    /* distance from right of image */
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 5px 7px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;    /* ensures it’s above image */
+  pointer-events: auto; /* clickable */
+}
+
+.item:hover .add-btn {
+  opacity: 1; /* show on hover */
+}
+
+.collected-img {
+  width: 200px;
+  height: auto;
+  margin: 0px;
+}
+
+
+#likeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background:none;
+  font-size:30px;
+}
+
+
+
+.dark-mode {
+  background-color: #222; /* dark background */
+  color: #fff;           /* light text */
+}
+
+/* optional: style the like button specifically if needed */
+
+
+
+
+#collectionModal {
+    display:none;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.9);
+  overflow-y: auto;
+  padding: 40px;
+  z-index: 2000;
+}
+
+
+
+#closeCollection {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background:none;
+    font-size:30px;
+    color:white;
+}
+
+
+#collectionContent {
+  display: flex;
+  margin-block-start: 50px;
+  flex-wrap: wrap;       /* allows images to wrap to next line */
+  gap: 10px;             /* spacing between images */
+  justify-content: flex-start; /* align images to the left */
+}
+
+
+
+
+.box {
+display:none;
+}
+
+
+#box p{
+  font-size: 30px;
+  padding: 10px 30px;
+  text-align: center;
+}
+
+
+#nature {
+  display: none;            /* hidden by default */
+  position: absolute;       /* allows child paragraphs to be positioned freely */
+  text-align: center;
+  top: 0;
+  box-sizing: border-box;
+  color: #fff;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;     /* lets clicks pass through images if needed */
+  z-index: 800;
+}
+
+/* Position each paragraph independently */
+#verse1 {
+  position: absolute;
+  top: 680px;
+  left: 200px;       
+  font-size: 20px;
+}
+
+#verse2 {
+    position: absolute;  
+    top: 1600px;
+  right: 345px;           
+  font-size:10px;
+}
+
+#verse3 {
+  position: absolute;
+  top: 3100px;
+  left: 220px;
+  font-size:35px;
+}
+
+#verse4 {
+  position: absolute;
+  top: 5300px;
+  left: 1%;
+  font-size:16px;
+}
+
+#verse5 {
+  position: absolute;
+  top: 7300px;
+  left: 50%;
+  font-size:23px;
+}
+
+#verse6 {
+  position: absolute;
+  top: 9300px;
+  left: 30%;
+  font-size:12px;
+}
+
+
+#human {
+  display: none;        /* hidden by default */
+  position: absolute;  
+  text-align: left;
+    top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
+  z-index: 800;
+    max-height: 100%;
+}
+
+/* Make each paragraph absolute inside #human */
+#verse1-1 {
+    position: absolute;  
+    top: 1340px;
+      left: 750px;       왼쪽 위치 조정 
+  width: 300px;
+}
+
+#verse2-2 {
+  position: absolute;   /* also needs this */
+  top: 270px;
+  left: 100px;
+  width: 30%;
+}
+
+#verse3-3 {
+  position: absolute;   /* also needs this */
+  top: 2980px;
+  left: 40px;
+  width: 30%;
+}
+
+#verse4-4 {
+  position: absolute;   /* also needs this */
+  top: 5250px;
+  left: 540px;
+  width: 30%;
+}
+
+#verse5-5 {
+  position: absolute;
+  top: 6625px;
+  right:75px;
+
+}
+
+
+#verse6-6 {
+  position: absolute;   /* also needs this */
+  top: 8555px;
+  left: 265px;
+  width: 30%;
+}
+
+#verse7-7 {
+  position: absolute;   /* also needs this */
+  top: 9665px;
+  left: 480px;
+  width: 30%;
+}
+
+
+#space {
+  display: none;        /* hidden by default */
+  position: absolute;  
+  text-align: justify;
+  padding: 20px;
+    top: 0;
+  left: 0;
+  height: 100%;
+  box-sizing: border-box;
+  color: #fff;
+  z-index: 800;
+  letter-spacing: 1.2px;
+  line-height: 1.7;
+}
+
+
+#verse1-1-1 {
+    position: absolute;  
+    top: 1970px;
+      left: 880px;      
+  width:400px;
+    font-size: 30px;
+
+
+}
+
+#verse2-2-2 {
+    position: absolute;  
+    top: 7150px;
+      left: 60px;      
+  width: 700px;
+    font-size: 30px;
+
+}
+
+#verse3-3-3 {
+    position: absolute;  
+    top: 9930px;
+      left: 990px;      
+  width: 180px;
+    font-size: 30px;
+
+}
+
+p{
+  max-height: 100%;
+  overflow:hidden;
+}
+
+
+
+
+body.dark-mode .category-text {
+  color: #fff;          /* dark mode일 때 색상 */
+}
+
