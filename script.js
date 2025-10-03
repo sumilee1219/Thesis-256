@@ -717,46 +717,7 @@ closeCollection.addEventListener("click", () => {
 });
 
 
-downloadBtn.addEventListener("click", async () => {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
 
-  if (collectedImages.length === 0) {
-    alert("No images to save!");
-    return;
-  }
-
-  for (let i = 0; i < collectedImages.length; i++) {
-    const imgIndex = collectedImages[i];
-    const imgElement = document.querySelector(`.grid .item img[data-index='${imgIndex}']`);
-    if (!imgElement) continue;
-
-    const imgData = await toDataURL(imgElement.src);
-
-    if (i > 0) pdf.addPage();
-    pdf.addImage(imgData, "JPEG", 10, 10, 190, 0);
-  }
-
-  pdf.save("collection.pdf");
-});
-
-// Helper function
-function toDataURL(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "Anonymous"; // needed if images are from other domains
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      resolve(canvas.toDataURL("image/jpeg"));
-    };
-    img.onerror = reject;
-    img.src = url;
-  });
-}
 
 
 

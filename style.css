@@ -356,14 +356,6 @@ footer {
 }
 
 
-#downloadPDF {
-  position: absolute;
-  top: 30px;
-  right:80px;
-  padding: 5px 10px;
-  cursor: pointer;
-  border:none;
-}
 
 #closeCollection {
   position: fixed;
